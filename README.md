@@ -1,0 +1,2 @@
+# mongodb-practice-api
+Spent yesterday running through a MongoDB course to brush up on how it works. Just wanted to spent an hour or so playing around with what I learned to make sure that I remember everything! Probably just doing to be a little todo API with some random schemas, virtuals that dont do anything super important, and indexes. Going to note everything that i do while I do it to make sure that I have a reference to look back at when actually building an application with mongo.
