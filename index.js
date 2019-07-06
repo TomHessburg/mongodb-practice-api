@@ -4,7 +4,11 @@ const morgan = require("morgan");
 const cors = require("cors");
 const { json, urlencoded } = require("body-parser");
 const mongoose = require("mongoose");
+// import routes
+const usersRouter = require("./routes/usersRouter.js");
+const postsRouter = require("./routes/postsRouter.js");
 
+// users schema, just using this on connection, not necessary
 const User = require("./schemas/UserSchema.js");
 
 // server instantiation and middleware
@@ -15,6 +19,8 @@ server.use(urlencoded({ extended: true }));
 server.use(morgan("dev"));
 
 //routes
+server.use("/api/users", usersRouter);
+server.use("/api/posts", postsRouter);
 
 // connect to db and listen
 const connect = () => {
