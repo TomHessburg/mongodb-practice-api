@@ -5,9 +5,12 @@ const { generateToken } = require("../auth/restrictedMiddleware.js");
 
 router.post("/login", async (req, res) => {
   try {
+    // find the user
     const user = await User.findOne({ username: req.body.username }).exec();
 
+    // uses bcrypt to check wither the plain text password matches the hashed password
     if (user && bcrypt.compareSync(req.body.password, user.password)) {
+      //generates a jwt
       const token = generateToken(user);
       res.status(200).json({
         message: `Welcome, ${user.username}!`,
@@ -24,6 +27,7 @@ router.post("/login", async (req, res) => {
 
 router.post("/register", async (req, res) => {
   let user = req.body;
+  // hashes a users password when they register and account
   user.password = bcrypt.hashSync(user.password, 8);
 
   try {
