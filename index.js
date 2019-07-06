@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const { json, urlencoded } = require("body-parser");
 const mongoose = require("mongoose");
+const { authenticate } = require("./auth/restrictedMiddleware.js");
 // import routes
 const usersRouter = require("./routes/usersRouter.js");
 const postsRouter = require("./routes/postsRouter.js");
@@ -21,8 +22,8 @@ server.use(morgan("dev"));
 
 //routes
 server.use("/api/auth", authRouter);
-server.use("/api/users", usersRouter);
-server.use("/api/posts", postsRouter);
+server.use("/api/users", authenticate, usersRouter);
+server.use("/api/posts", authenticate, postsRouter);
 
 // connect to db and listen
 const connect = () => {

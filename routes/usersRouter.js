@@ -39,21 +39,23 @@ router.get("/:id", async (req, res) => {
 });
 
 // post a user
-router.post("/", async (req, res) => {
-  try {
-    const newUser = await User.create(req.body);
+// moved this route to auth
 
-    if (newUser) {
-      res.status(201).json(newUser);
-    } else {
-      res
-        .status(404)
-        .json({ message: "Invalid user. Please provide all required fields." });
-    }
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// router.post("/", async (req, res) => {
+//   try {
+//     const newUser = await User.create(req.body);
+
+//     if (newUser) {
+//       res.status(201).json(newUser);
+//     } else {
+//       res
+//         .status(404)
+//         .json({ message: "Invalid user. Please provide all required fields." });
+//     }
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 // delete a user by id
 router.delete("/:id", async (req, res) => {
