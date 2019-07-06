@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 // import routes
 const usersRouter = require("./routes/usersRouter.js");
 const postsRouter = require("./routes/postsRouter.js");
+const authRouter = require("./routes/authRouter.js");
 
 // users schema, just using this on connection, not necessary
 const User = require("./schemas/UserSchema.js");
@@ -19,6 +20,7 @@ server.use(urlencoded({ extended: true }));
 server.use(morgan("dev"));
 
 //routes
+server.use("/api/auth", authRouter);
 server.use("/api/users", usersRouter);
 server.use("/api/posts", postsRouter);
 
