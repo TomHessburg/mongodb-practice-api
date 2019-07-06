@@ -55,4 +55,32 @@ router.post("/", async (req, res) => {
   }
 });
 
+// delete a user by id
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.params.id).exec();
+    // deletes all posts related to the user
+    const deletePosts = await Post.deleteMany({ user: deletedUser._id }).exec();
+    res
+      .status(203)
+      .json({ message: `successfulyl deleted user: ${deletedUser._id}` });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// update a user by id
+router.put("/:id", async (req, res) => {
+  try {
+    const updatedUser = await Post.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      useFindAndModify: false
+    }).exec();
+
+    res.status(201).json(updatedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
